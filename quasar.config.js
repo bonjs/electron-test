@@ -191,6 +191,7 @@ export default defineConfig((/* ctx */) => {
 
         appId: 'myquasar',
         productName: 'myquasar', // 生成的 EXE 文件名称
+        artifactName: 'myquasar.Setup.${version}.${ext}', // 设置生成的文件名格式
         win: {
             target: 'nsis', // 生成 Windows 安装程序
             icon: 'src-electron/icons/icon.ico'
@@ -198,7 +199,14 @@ export default defineConfig((/* ctx */) => {
         nsis: {
             oneClick: false, // 是否支持一键安装
             allowToChangeInstallationDirectory: true // 允许选择安装目录
-        }
+        },
+        "publish": [
+          {
+            "provider": "github",
+            "owner": "bonjs",
+            "repo": "electron-test"
+          }
+        ]
       }
     },
 

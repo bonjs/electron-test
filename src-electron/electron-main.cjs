@@ -184,20 +184,20 @@ function checkForUpdates() {
   autoUpdater.autoDownload = false; // 设置为手动下载更新
   autoUpdater.on("update-available", (info) => {
     log.info('发现新版本')
-    dialog
-      .showMessageBox({
+    dialog.showMessageBox({
         type: "info",
         title: "发现新版本",
         message: `发现新版本 ${info.version}，是否立即更新？`,
         buttons: ["是", "否"],
-      })
-      .then((result) => {
+      }).then((result) => {
         log.info('response:' + result.response)
         if (result.response === 0) {
           try {
+            log.info('before downloadUpdate');
             autoUpdater.downloadUpdate();
+            log.info('after downloadUpdate');
           } catch(e) {
-            log.info(e.message);
+            log.info('异常' + e.message);
           }
             
         }
@@ -205,27 +205,17 @@ function checkForUpdates() {
   });
 
   autoUpdater.on("update-downloaded", () => {
+    log.info('update-downloaded');
     dialog
       .showMessageBox({
         type: "info",
         title: "更新已下载",
         message: "新版本已下载，是否立即安装？",
         buttons: ["是", "稍后"],
-      })
-      .then((result) => {
-
-        dialog.showMessageBox({
-            type: "info",
-            title: "aa",
-            message: `${result.response}`,
-            buttons: ["是", "否"],
-        }).then(() => {
-            if (result.response === 0) {
-                setTimeout(() => {
-                    autoUpdater.quitAndInstall(true, true);
-                }, 2000); // 等待 2 秒后退出
-            }
-        })
+      }).then((result) => {
+        if (result.response === 0) {
+          autoUpdater.quitAndInstall(true, true);
+        }
       });
   });
 
@@ -245,5 +235,6 @@ function checkForUpdates() {
 
   autoUpdater.on("error", (error) => {
     console.error("更新出错:", error);
+    log.info('更新出错:' + error);
   });
 }

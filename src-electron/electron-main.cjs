@@ -3,11 +3,16 @@ import path from 'node:path'
 import os from 'node:os'
 
 
-import pkg from 'electron-updater';
-const { autoUpdater } = pkg;
+import { createRequire } from 'node:module';
+
+// 使用 createRequire 创建一个 CommonJS 兼容的 require 方法
+const require = createRequire(import.meta.url);
+
+// 使用 require 导入 electron-updater
+const { autoUpdater } = require('electron-updater');
 
 
-import log  from "electron-log";
+const log = require("electron-log");
 
 import { fileURLToPath } from 'node:url'
 
@@ -49,7 +54,7 @@ async function createWindow () {
   } else {
     // we're on production; no access to devtools pls
     mainWindow.webContents.on('devtools-opened', () => {
-      mainWindow.webContents.closeDevTools()
+      //mainWindow.webContents.closeDevTools()
     })
   }
 

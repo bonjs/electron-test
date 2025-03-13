@@ -7,7 +7,7 @@
         <q-toolbar-title>
           my Quasar App
         </q-toolbar-title>
-        <div>v1.0.0</div>
+        <div>v1.0.1</div>
       </q-toolbar>
     </q-header>
 

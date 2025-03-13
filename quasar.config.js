@@ -190,7 +190,7 @@ export default defineConfig((/* ctx */) => {
         // https://www.electron.build/configuration/configuration
 
         appId: 'myquasar',
-        productName: 'YourApp', // 生成的 EXE 文件名称
+        productName: 'myquasar', // 生成的 EXE 文件名称
         win: {
             target: 'nsis', // 生成 Windows 安装程序
             icon: 'src-electron/icons/icon.ico'

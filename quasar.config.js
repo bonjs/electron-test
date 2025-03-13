@@ -173,19 +173,6 @@ export default defineConfig((/* ctx */) => {
 
       //bundler: 'packager', // 'packager' or 'builder'
       bundler: 'builder', // 使用 electron-builder
-  	builder: {
-    		appId: 'com.yourapp.id',
-    		productName: 'YourApp', // 生成的 EXE 文件名称
-    		win: {
-      			target: 'nsis', // 生成 Windows 安装程序
-      			icon: 'src-electron/icons/icon.ico'
-    		},
-    		nsis: {
-      			oneClick: false, // 是否支持一键安装
-      			allowToChangeInstallationDirectory: true // 允许选择安装目录
-    		}
-  	},
-
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
 
@@ -202,7 +189,16 @@ export default defineConfig((/* ctx */) => {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'myquasar'
+        appId: 'myquasar',
+        productName: 'YourApp', // 生成的 EXE 文件名称
+        win: {
+            target: 'nsis', // 生成 Windows 安装程序
+            icon: 'src-electron/icons/icon.ico'
+        },
+        nsis: {
+            oneClick: false, // 是否支持一键安装
+            allowToChangeInstallationDirectory: true // 允许选择安装目录
+        }
       }
     },
 

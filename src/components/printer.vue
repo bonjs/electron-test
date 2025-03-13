@@ -28,7 +28,6 @@ async function loadPrinters() {
 // 发送打印请求
 function printDocument() {
     if (!selectedPrinter.value || !printContent.value) {
-      debugger
         // ElMessage.warning("请选择打印机并输入内容");
         $q.notify({
           message: '请选择打印机并输入内容',

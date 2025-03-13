@@ -2,20 +2,12 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer"/>
 
         <q-toolbar-title>
-          Quasar App
+          my Quasar App
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <div>v1.0.0</div>
       </q-toolbar>
     </q-header>
 
@@ -25,9 +17,7 @@
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
+        <q-item-label header>
           Essential Links
         </q-item-label>
 
@@ -39,15 +29,49 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+    <q-list bordered class="rounded-borders" style="margin-top:50px">
+      <q-expansion-item label="远程接口调用" icon="folder">
+        <q-card>
+          <q-card-section>
+            <q-btn type="primary" @click="apiCall">远程接口调用</q-btn>
+            http://jsonplaceholder.typicode.com/posts
+            <div  style="height: 200px; overflow: scroll;">返回：{{ data }}</div>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+
+      <q-expansion-item label="使用前端数据库 " icon="folder">
+        <q-card>
+          <q-card-section>
+            <indexeddb></indexeddb>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+
+      <q-expansion-item label="打印" icon="folder">
+        <q-card>
+          <q-card-section>
+            <printer></printer>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+      <q-expansion-item label="热更新" icon="folder">
+        <q-card>
+          <q-card-section>
+            <q-btn type="primary" @click="hotUpdate">热更新</q-btn>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+    </q-list>
+
   </q-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import indexeddb from 'components/indexeddb.vue'
+import printer from 'components/printer.vue'
 
 const linksList = [
   {
@@ -63,30 +87,6 @@ const linksList = [
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
     title: 'Quasar Awesome',
     caption: 'Community Quasar projects',
     icon: 'favorite',
@@ -95,6 +95,24 @@ const linksList = [
 ]
 
 const leftDrawerOpen = ref(false)
+
+let data = ref('')
+
+async function apiCall() {
+  // window.electronAPI.sendMessage('do-something', 'Hello from Vue!');
+  let url = 'http://jsonplaceholder.typicode.com/posts';
+  data.value = await window.electronAPI.getData(url);
+  console.log('data', data);
+}
+
+async function hotUpdate() {
+  let result = await window.electronAPI.update();
+  console.log('hostUpdate', result);
+}
+async function testUpdate() {
+  let result = await window.electronAPI.testUpdate();
+  console.log('hostUpdate', result);
+}
 
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value

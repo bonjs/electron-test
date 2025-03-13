@@ -53,7 +53,11 @@ export default [
 
     // add your custom rules here
     rules: {
+      'no-unused-vars': 'off',
       'prefer-promise-reject-errors': 'off',
+      "no-unreachable": "off",
+      "vue/multi-word-component-names": "off",
+
 
       // allow debugger during development only
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'

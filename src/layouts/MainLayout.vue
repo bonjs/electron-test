@@ -7,7 +7,7 @@
         <q-toolbar-title>
           my Quasar App
         </q-toolbar-title>
-        <div>v1.0.2</div>
+        <div>v1.0.0</div>
       </q-toolbar>
     </q-header>
 
@@ -58,7 +58,7 @@
       <q-expansion-item label="热更新" icon="folder">
         <q-card>
           <q-card-section>
-            <q-btn type="primary" @click="hotUpdate">热更新</q-btn> 当前版本: v1.0.2
+            <q-btn type="primary" @click="hotUpdate">热更新</q-btn> 当前版本: v1.0.0
           </q-card-section>
         </q-card>
       </q-expansion-item>

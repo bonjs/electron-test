@@ -221,12 +221,12 @@ function checkForUpdates() {
 
   autoUpdater.on('download-progress', (progressObj) => {
     log.info(`下载进度: ${progressObj.percent}%`);
-    mainWindow.setProgressBar(`下载进度: ${progressObj.percent}%`);
-    if(progressObj.percent >= 100) {
-      setTimeout(() => {
-        mainWindow.setProgressBar(-1)
-      }, 1000);
-    }
+    // mainWindow.setProgressBar(`下载进度: ${progressObj.percent}%`);
+    // if(progressObj.percent >= 100) {
+    //   setTimeout(() => {
+    //     mainWindow.setProgressBar(-1)
+    //   }, 1000);
+    // }
   });
 
   // **如果没有新版本，提示用户**

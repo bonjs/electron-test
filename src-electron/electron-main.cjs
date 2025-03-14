@@ -89,9 +89,9 @@ process.on("uncaughtException", (error) => {
 function ipcMainHandle() {
 
   // 监听获取打印机列表的请求
-  ipcMain.handle('get-printers', () => {
+  ipcMain.handle('get-printers', async () => {
     console.log('get-printer')
-    return mainWindow.webContents.getPrintersAsync(); // 返回所有可用的打印机
+    return await mainWindow.webContents.getPrintersAsync(); // 返回所有可用的打印机
   });
 
   // 监听打印请求

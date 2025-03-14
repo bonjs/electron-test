@@ -73,6 +73,10 @@ import EssentialLink from 'components/EssentialLink.vue'
 import indexeddb from 'components/indexeddb.vue'
 import printer from 'components/printer.vue'
 
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
+const isMobile = $q.platform.is.mobile;
+
 const linksList = [
   {
     title: 'Docs',
@@ -100,9 +104,18 @@ let data = ref('')
 
 async function apiCall() {
   // window.electronAPI.sendMessage('do-something', 'Hello from Vue!');
+
   let url = 'http://jsonplaceholder.typicode.com/posts';
-  data.value = await window.electronAPI.getData(url);
-  console.log('data', data);
+  if (isMobile) {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    data.value = data
+    alert(JSON.stringify(data))
+  } else {
+    data.value = await window.electronAPI.getData(url);
+    console.log('data', data);
+  }
 }
 
 async function hotUpdate() {
